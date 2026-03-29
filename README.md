@@ -1,7 +1,3 @@
-Here's a rewrite that keeps the chaotic spirit but ditches the Gemini playbook:
-
----
-
 # GALACTIC CONCLAVE v0.6.0
 ## The "Stochastic Railgun" Release
 
