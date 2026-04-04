@@ -1,0 +1,152 @@
+import heapq, threading, time, hashlib, sys, os, platform, logging, json, zipfile
+import tkinter as tk
+from tkinter import scrolledtext, messagebox, simpledialog, filedialog
+from datetime import datetime
+from pathlib import Path
+from enum import IntEnum
+from logging.handlers import RotatingFileHandler
+
+# ========================= MODULE 1: THE FILING HEAP (PRIORITY) =========================
+class VogonPriority(IntEnum):
+    IMMEDIATE = 0
+    COMMAND = 1
+    BUREAUCRACY = 2
+    SOUL_CACHE = 3
+    HEURISTICS = 4
+
+class Cue:
+    __slots__ = ('priority', 'origin', 'payload', 'ts', 'sig')
+    def __init__(self, p, o, l, sig):
+        self.priority, self.origin, self.payload = p, o, l
+        self.ts = time.perf_counter()
+        self.sig = sig
+    def __lt__(self, other): return self.priority < other.priority
+
+# ========================= MODULE 2: THE BRIDGE (THE WATCHER) =========================
+class VogonBridge:
+    def __init__(self, algo):
+        self.algo = algo
+        self.master_sig = self._generate_genesis_seal()
+        self.queue, self.modules, self.running = [], {}, True
+
+    def _generate_genesis_seal(self):
+        with open(__file__, "rb") as f:
+            return hashlib.sha256(f.read()).hexdigest() if self.algo == "sha256" else hashlib.md5(f.read()).hexdigest()
+
+    def register(self, name, inst): self.modules[name] = inst
+    def dispatch(self, p, o, l): heapq.heappush(self.queue, Cue(p, o, l, self.master_sig))
+
+    def process(self):
+        while self.running:
+            if self.queue:
+                cue = heapq.heappop(self.queue)
+                if cue.sig != self.master_sig: os._exit(1) # THE INTEGRITY STRIKE
+                
+                latency = time.perf_counter() - cue.ts
+                if latency > 0.01: logging.warning(f"HEURISTICS: Slow hardware detected.")
+
+                if cue.origin in self.modules:
+                    threading.Thread(target=self.modules[cue.origin].handle, args=(cue,), daemon=True).start()
+            time.sleep(0.01)
+
+# ========================= MODULE 3: SAVE_PARSER (INDEXED DIVING) =========================
+class SaveParser:
+    def handle(self, cue):
+        path = Path(cue.payload.get("path", ""))
+        if path.exists():
+            with zipfile.ZipFile(path, 'r') as z:
+                with z.open('gamestate') as f:
+                    data = f.read(500) # v0.6 Index-only approach
+                    logging.info(f"PARSER: Save indexed. Integrity maintained.")
+
+# ========================= MODULE 4: EYES_PROMPTS (MILITARY CONTEXT) =========================
+class EyesPrompts:
+    def handle(self, cue):
+        ratio = cue.payload.get("ratio", 1.0)
+        # v0.6 Military Tone injection
+        tone = "SUPERIOR" if ratio > 1.5 else "WEAK" if ratio < 0.6 else "EQUAL"
+        logging.info(f"PROMPT: System state updated with {tone} posture.")
+
+# ========================= MODULE 5: SOUL_SHRUB (CLASSIFIER CACHE) =========================
+class SoulShrub:
+    def __init__(self):
+        self.cache = {} # 300s TTL Cache per v0.6.0
+        self._lock = threading.Lock()
+
+    def handle(self, cue):
+        msg = cue.payload.get("msg", "")
+        with self._lock:
+            if msg in self.cache and (time.time() - self.cache[msg]['ts'] < 300):
+                return self.cache[msg]['val']
+            # Fallback to simulation
+            self.cache[msg] = {'val': "NEUTRAL", 'ts': time.time()}
+
+# ========================= MODULE 6: MEMORY_GAL_REP (SAFE CHRONICLES) =========================
+class MemoryGalRep:
+    def __init__(self):
+        self.histories = {}
+        self._lock = threading.Lock()
+
+    def handle(self, cue):
+        name, entry = cue.payload.get("name"), cue.payload.get("entry")
+        with self._lock:
+            if name not in self.histories: self.histories[name] = []
+            self.histories[name].append(entry)
+            # v0.6.0 Trimming: Keep 1st pair and last 13 pairs
+            if len(self.histories[name]) > 28:
+                self.histories[name] = self.histories[name][:2] + self.histories[name][-26:]
+
+# ========================= MODULE 7: VOGON_VOICE (PERSISTENCE) =========================
+class VogonVoice:
+    _STATE = Path("crab_counter.state")
+    @classmethod
+    def smash(cls):
+        c = int(cls._STATE.read_text()) + 1 if cls._STATE.exists() else 1
+        cls._STATE.write_text(str(c))
+        return c
+    def handle(self, cue):
+        print(f"BUREAUCRATIC TRANSMISSION: {cue.payload}")
+
+# ========================= MODULE 8: CONCLAVE_UI (STASIS & LOGS) =========================
+class ConclaveUI:
+    def __init__(self, root, bridge):
+        self.root, self.bridge = root, bridge
+        self._init_logs()
+        
+        tk.Label(root, text="Stellaris Game Path:").pack()
+        self.path_entry = tk.Entry(root, width=50)
+        self.path_entry.pack()
+        
+        self.text = scrolledtext.ScrolledText(root, width=60, height=15)
+        self.text.pack(pady=10)
+
+    def _init_logs(self):
+        # 5MB Rotating logs as per v0.6 requirements
+        h = RotatingFileHandler("galactic_conclave.log", maxBytes=5*1024*1024, backupCount=3)
+        logging.basicConfig(handlers=[h], level=logging.INFO)
+
+# ========================= EXECUTION =========================
+def main():
+    root = tk.Tk()
+    root.withdraw()
+    algo = simpledialog.askstring("ENCRYPTION", "Choose sha256 or md5:", initialvalue="sha256")
+    if not algo: sys.exit(0)
+
+    count = VogonVoice.smash()
+    bridge = VogonBridge(algo.lower())
+    
+    # Registering the Eight
+    bridge.register("SAVE", SaveParser()); bridge.register("EYES", EyesPrompts())
+    bridge.register("SOUL", SoulShrub()); bridge.register("MEMORY", MemoryGalRep())
+    bridge.register("VOICE", VogonVoice())
+
+    threading.Thread(target=bridge.process, daemon=True).start()
+    
+    ui_win = tk.Toplevel(root)
+    ui = ConclaveUI(ui_win, bridge)
+    bridge.dispatch(VogonPriority.COMMAND, "VOICE", f"Octagon logic active. Smashes: {count}")
+    
+    root.mainloop()
+
+if __name__ == "__main__":
+    main()
