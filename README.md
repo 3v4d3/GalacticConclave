@@ -16,7 +16,7 @@ Look, we built something that lets you actually *talk* to the AIs in your Stella
 5. Tell it your console key (default's the backtick key). Stellaris has this in Settings → Controls. Get it wrong and you're just waving at the void
 6. Hit go. It'll find your newest save and list every empire
 
-## The Actual Architecture
+## The Actual Architecture (outdated, needs re-monolithing)
 
 The Brain (`main.py`) orchestrates everything. The Face (`ui.py`) keeps the interface lean—no bloat, just what you need. The Bridge (`llm_client.py`) pumps your messages through whatever LLM you picked. The Hands (`game_io.py`) is the real magic: instead of clicking buttons like a Victorian telegraph operator, v0.6 writes commands to `conclave_cmd.txt` in your root folder and fires them off with the `run` command. One signal, one outcome.
 
