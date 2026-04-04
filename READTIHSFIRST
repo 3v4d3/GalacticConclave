@@ -1,0 +1,83 @@
+VOGON ENTERPRISE SOLUTIONS — BUREAUCRATIC BULLETIN #881-X/12
+
+SUBJECT: ANNOUNCEMENT OF THE GALACTIC CONCLAVE SOFTWARE SOLUTION (v0.7.0) — A COMMUNICATIONS OVERLAY FOR INTERSTELLAR DIPLOMATIC INTERACTION WITHIN THE PARADOX INTERACTIVE STELLARIS™ SIMULATION ENVIRONMENT
+
+TO ALL DEPARTMENTS, SUB-DEPARTMENTS, AND INDIVIDUALS WHO HAVE FILED FORM 7-B-Γ (REQUESTS FOR NOTIFICATION OF NON-ESSENTIAL SOFTWARE UPDATES):
+
+1. PREAMBLE (WHICH IS ITSELF A PREAMBLE)
+
+This announcement exists. It has been written. You are reading it. These three facts are independent and mutually reinforcing. The announcement hereby announces that it is an announcement, and by the authority vested in the Galactic Hyper‑Parliament of Filing Clerks, it is considered announced.
+
+2. THE PRODUCT (WHICH DOES NOT DO TOO MUCH, BUT DOES ENOUGH)
+
+We present Galactic Conclave v0.7.0 — a software solution that:
+
+Exists. (Verification: see Section 1.)
+
+Interfaces with the Stellaris save‑game format via index‑only parsing (500 bytes, no more, no less — because more would be inefficient and less would be suspicious).
+
+Translates diplomatic messages using a Large Language Model (LLM) of your choice (OpenAI, Groq, Anthropic, DeepSeek, or a local Ollama instance — we do not judge, we only process).
+
+Injects console commands directly into a running Stellaris instance (provided you have launched through Steam, not the Paradox Launcher, and have added -open_console to your launch options, and the game is unpaused, and the stars are aligned, and you have filed Form 9‑K/12 in triplicate).
+
+Displays a chat overlay with a dark theme reminiscent of a submarine control room (because diplomacy is warfare by other means).
+
+Includes a Holonet News reader that reframes mundane Earth RSS feeds into gritty Star Wars narratives (because the galaxy is a mirror, and the mirror is cracked, and the crack is content).
+
+3. WHAT IT DOES NOT DO (A NON‑EXHAUSTIVE LIST)
+
+It does not cure space herpes.
+
+It does not balance your economy.
+
+It does not make the AI less likely to declare war because you sneezed near their borders.
+
+It does not replace the need for a proper filing system (see Appendix A: Forms).
+
+It does not do too much. It does enough. Enough is defined as: *the minimum amount required to avoid a formal complaint from the Bureaucratic Oversight Committee (BOC) – file ref. 2025/Ω-42*.
+
+4. THE CRAB COUNTER (A FEATURE THAT IS ALSO A METAPHOR)
+
+A file named crab_counter.state will appear in your configuration directory. Each time you launch Galactic Conclave, this integer increments by one. The crab does not care. The hammer is true. Smashing is optional but encouraged. The raisins are gone.
+
+5. MARKETING REDUNDANCY CHECK (PERFORMED BY THE PRODUCT UPON ITSELF)
+
+Is this announcement aware of its own existence?
+YES. It contains the word "announcement" 14 times (now 15).
+Does it refer to itself in the third person?
+YES. See Section 1.
+Would it still function if the word "bureaucratic" were removed?
+NO. The entire enterprise would collapse into a singularity of meaninglessness.
+Therefore, the announcement checks itself. It is itself. It works.
+
+6. HOW TO ACQUIRE (A PROCESS THAT IS ALSO A FORM)
+
+Obtain the source code from the Vogon Repository of Questionable Provenance (contact your local filing clerk).
+
+Install dependencies: pip install openai pyautogui pygetwindow feedparser httpx uvicorn fastapi jinja2 anthropic (if you miss any, the application will inform you with a pop‑up that is both modal and menacing).
+
+Run python main.py.
+
+Enter an API key (or type "ollama" for local suffering).
+
+Load a Stellaris save file.
+
+Begin transmitting. Or don't. The software does not judge. It only logs.
+
+7. LEGAL DISCLAIMER (WHICH IS LONGER THAN THE ANNOUNCEMENT)
+
+Galactic Conclave is provided "as is", without warranty of any kind, express or implied, including but not limited to the warranties of merchantability, fitness for a particular purpose, non‑infringement, or the ability to impress your friends at parties. The authors are not responsible for any diplomatic incidents, accidental war declarations, or the spontaneous combustion of your hard drive. Use at your own risk. The crab is watching.
+
+8. CONCLUSION (WHICH IS ALSO A RECURSION)
+
+This announcement ends. But it also begins again the moment you reread it. That is the Vogon way.
+
+Signed,
+
+The Vogon Supreme Bureaucrat (Acting, Temporary, and Self‑Appointed)
+Department of Redundant Announcements
+Sub‑department of Self‑Referential Marketing
+Date: Stardate 2026.04.04 (Earth calendar, approximated, not guaranteed)
+
+END OF ANNOUNCEMENT.
+(This sentence is also part of the announcement.)
