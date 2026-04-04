@@ -1,11 +1,11 @@
-# GALACTIC CONCLAVE v0.6.0
-## The "Stochastic Railgun" Release
+# GALACTIC CONCLAVE v0.4.4
+## The "Vogon Omega" Release
 
 Look, we built something that lets you actually *talk* to the AIs in your Stellaris save, and they'll change their minds, declare war, or offer trade deals based on what you say. The diplomacy screen in vanilla is basically a cardboard cutout. This is not that.
 
 (Fair warning: if you can't read, this won't help you. The analphabetic marsupials who tried to run the beta have all been composted and resold to the Galactic Market as fertilizer.)
 
-## Installation (The Boring Part)
+## Installation (The Boring Part) - which possibly still works. untested. EXPERIMENTAL!
 
 1. Download `GalacticConclave.exe` from releases
 2. Run it while Stellaris is sitting there unpaused
